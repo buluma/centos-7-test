@@ -2,7 +2,7 @@ FROM centos:7
 LABEL maintainer="Buluma Michael"
 ENV container=docker
 
-ENV pip_packages "ansible"
+# ENV pip_packages "ansible"
 
 # Install systemd -- See https://hub.docker.com/_/centos/
 RUN yum -y update; yum clean all; \
@@ -29,11 +29,11 @@ RUN yum makecache fast \
 RUN pip install $pip_packages
 
 # Disable requiretty.
-RUN sed -i -e 's/^\(Defaults\s*requiretty\)/#--- \1/'  /etc/sudoers
+# RUN sed -i -e 's/^\(Defaults\s*requiretty\)/#--- \1/'  /etc/sudoers
 
 # Install Ansible inventory file.
-RUN mkdir -p /etc/ansible
-RUN echo -e '[local]\nlocalhost ansible_connection=local' > /etc/ansible/hosts
+# RUN mkdir -p /etc/ansible
+# RUN echo -e '[local]\nlocalhost ansible_connection=local' > /etc/ansible/hosts
 
 VOLUME ["/sys/fs/cgroup"]
 CMD ["/usr/lib/systemd/systemd"]
